@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
 
 import Header from "../components/common/Header";
 import Menu from "../components/common/Menu";
@@ -25,7 +27,7 @@ export default function Today() {
 		<>
 			<Header />
 			<Content>
-				<h1>Segunda, 17/05</h1>
+				<h1>{dayjs().locale("pt-br").format("dddd, DD/MM")}</h1>
 				<h2>Nenhum hábito concluído ainda</h2>
 				{habits.map(h => {
 					<Habit key={h.id} habit={h}/>;
