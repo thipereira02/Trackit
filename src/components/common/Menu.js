@@ -34,6 +34,7 @@ const Content = styled.div`
     justify-content: space-around;
     align-items: center;
     color: #52B6FF;
+    background-color: #FFF;
     font-size: 18px;
     line-height: 22px;
 
