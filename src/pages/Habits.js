@@ -6,17 +6,13 @@ import Menu from "../components/common/Menu";
 import NewHabit from "../components/NewHabit";
 
 export default function Habits() {
-	function addHabit() {
-        
-	}
-
 	return (
 		<>
 			<Header />
 			<Container>
 				<TitleLine>
 					<h1>Meus hábitos</h1>
-					<div onClick={addHabit}>+</div>
+					<div>+</div>
 				</TitleLine>
 				<NewHabit />
 				<p>
