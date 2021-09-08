@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Login from "../pages/Login";
 
 import UserContext from "../contexts/UserContext";
 import GlobalStyle from "./common/GlobalStyle";
+import Login from "../pages/Login";
+import SignUp from "../pages/SignUp";
 
 export default function App() {
 	const [user, setUser] = useState("");
@@ -16,6 +17,9 @@ export default function App() {
 					<Switch>
 						<Route path="/" exact>
 							<Login />
+						</Route>
+						<Route path="/signup" exact>
+							<SignUp />
 						</Route>
 					</Switch>
 				</BrowserRouter>
