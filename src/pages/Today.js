@@ -28,7 +28,7 @@ export default function Today() {
 				<h1>Segunda, 17/05</h1>
 				<h2>Nenhum hábito concluído ainda</h2>
 				{habits.map(h => {
-					<Habit key={h.id} />;
+					<Habit key={h.id} habit={h}/>;
 				})}
 			</Content>
 			<Menu />

@@ -1,15 +1,16 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import styled from "styled-components";
 import { AiFillCheckSquare } from "react-icons/ai";
 
-export default function Habit() {
+export default function Habit({h}) {
 	return (
 		<>
 			<Content>
 				<div>
-					<h1>Ler 1 capítulo de livro</h1>
-					<p>Sequência atual: 3 dias</p>
-					<p>Seu recorde: 3 dias</p>
+					<h1>{h.name}</h1>
+					<p>Sequência atual: {h.currentSequence} dias</p>
+					<p>Seu recorde: {h.highestSequence} dias</p>
 				</div>
 				<Check />
 			</Content>
