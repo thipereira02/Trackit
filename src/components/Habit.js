@@ -13,22 +13,6 @@ export default function Habit() {
 				</div>
 				<Check />
 			</Content>
-			<Content>
-				<div>
-					<h1>Ler 1 capítulo de livro</h1>
-					<p>Sequência atual: 3 dias</p>
-					<p>Seu recorde: 3 dias</p>
-				</div>
-				<Check />
-			</Content>
-			<Content>
-				<div>
-					<h1>Ler 1 capítulo de livro</h1>
-					<p>Sequência atual: 3 dias</p>
-					<p>Seu recorde: 3 dias</p>
-				</div>
-				<Check />
-			</Content>
 		</>
 	);
 }

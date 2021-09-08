@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 import Header from "../components/common/Header";
 import Menu from "../components/common/Menu";
 import Habit from "../components/Habit";
 
+import UserContext from "../contexts/UserContext";
+
 export default function Today() {
+	const { user } = useContext(UserContext);
+	const config = { headers: { Authorization: `Bearer ${user.token}` } };
+	const [habits, setHabits] = useState([]);
+
+	useEffect(() => {
+		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
+		request.then(res => {
+			setHabits(res.data);
+		});
+		request.catch(() => alert("Ocorreu um erro na obtenção dos seus hábitos. Tente novamente mais tarde."));
+	},[]);
+
 	return (
 		<>
 			<Header />
 			<Content>
 				<h1>Segunda, 17/05</h1>
 				<h2>Nenhum hábito concluído ainda</h2>
-				<Habit />
+				{habits.map(h => {
+					<Habit key={h.id} />;
+				})}
 			</Content>
 			<Menu />
 		</>
