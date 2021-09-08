@@ -1,14 +1,34 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import Loader from "react-loader-spinner";
+import axios from "axios";
 
 import logo from "../components/assets/logo.png";
+import UserContext from "../contexts/UserContext";
 
 export default function Login() {
+	const { setUser } = useContext(UserContext);
+	const history = useHistory();
 	const [email, setEmail] = useState("");
 	const [password,setPassword] = useState("");
-	// eslint-disable-next-line no-unused-vars
 	const [button, setButton] = useState(true);
+
+	function login(e){
+		e.preventDefault();
+		setButton(false);
+
+		const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", {email, password});
+		request.then(res => {
+			const newUserData = {id: res.data.id, name: res.data.name, token: res.data.token, image: res.data.image};
+			setUser(newUserData);
+			history.push("/habits");
+		});
+		request.catch(() => {
+			alert("Email ou senha incorretos");
+			setButton(true);
+		});
+	}
 
 	return (
 		<>
@@ -16,7 +36,7 @@ export default function Login() {
 				<img src={logo} alt="TrackIt"/>
 			</Logo>
 			<Body>
-				<form>
+				<form onSubmit={login}>
 					<Input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} required/>
 					<Input type="password" placeholder="senha" value={password} onChange={e => setPassword(e.target.value)} required/>
 					<Button type="submit" disabled={button===true ? "" : "disabled"}>
