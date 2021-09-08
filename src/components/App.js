@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import UserContext from "../contexts/UserContext";
-import GlobalStyle from "./common/GlobalStyle";
+import GlobalStyle from "../layouts/GlobalStyle";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 

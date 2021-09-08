@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import Loader from "react-loader-spinner";
 
 import logo from "../components/assets/logo.png";
+import { Logo, Body, Input, Button } from "../layouts/Login_SignUp";
 
 export default function SignUp() {
 	const [email, setEmail] = useState("");
@@ -35,58 +35,3 @@ export default function SignUp() {
 		</>
 	);
 }
-
-const Logo = styled.div`
-    width: 180px;
-    height: 179px;
-    margin: 15% auto 20px auto;
-`;
-
-const Body = styled.div`
-    width: 80%;
-    height: max-content;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-
-    p {
-        font-size: 14px;
-        text-align: center;
-        text-decoration-line: underline;
-        color: #52B6FF;
-    }
-`;
-
-const Input = styled.input`
-    height: 45px;
-    width: 100%;
-    margin-bottom: 6px;
-    font-size: 20px;
-    border: 1px solid #D5D5D5;
-    border-radius: 5px;
-    padding-left: 11px;
-    ::placeholder{
-        color: #DBDBDB;  
-    }
-    :focus{
-        outline: 0;
-        color: #666666;
-    }
-`;
-
-const Button = styled.button`
-    background: #52B6FF;
-    width: 100%;
-    color: #FFF;
-    height: 45px;
-    font-size: 21px;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 25px;
-    :disabled{
-        background-color: #52B6FF;
-        opacity: 0.6;
-        color: #FFF;
-    }
-`;
