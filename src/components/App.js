@@ -5,6 +5,7 @@ import UserContext from "../contexts/UserContext";
 import GlobalStyle from "../layouts/GlobalStyle";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import Today from "../pages/Today";
 
 export default function App() {
 	const [user, setUser] = useState("");
@@ -20,6 +21,9 @@ export default function App() {
 						</Route>
 						<Route path="/signup" exact>
 							<SignUp />
+						</Route>
+						<Route path="/today" exact>
+							<Today />
 						</Route>
 					</Switch>
 				</BrowserRouter>
