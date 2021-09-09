@@ -1,33 +1,48 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+
+import UserContext from "../contexts/UserContext";
 
 export default function NewHabit({show}) {
+	const { user } = useContext(UserContext);
 	const [name, setName] = useState("");
-	const [selectedDays, setSelectedDays] = useState([]);
+	const [days, setDays] = useState([]);
 	const weekdays = ["D","S","T","Q","Q","S","S"];
-
+    
 	function selectDay(i) {
-		(selectedDays.includes(i)) ? 
-			setSelectedDays(selectedDays.filter(s => s !== i))
+		(days.includes(i)) ? 
+			setDays(days.filter(s => s !== i))
 			:
-			setSelectedDays([...selectedDays, i]);
+			setDays([...days, i]);
+	}
+    
+	function createNewHabit(e) {
+		e.preventDefault();
+
+		const body = {name, days};
+		const config = { headers: { Authorization: `Bearer ${user.token}` } };
+
+		const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config);
+		request.then(res => console.log(res.data));
+		request.catch(error => console.log(error));
 	}
 
 	return (
 		<Box>
-			<form>
+			<form onSubmit={createNewHabit}>
 				<input placeholder="nome do hábito" onChange={(e) => setName(e.target.value)} value={name} required/>
 				<Days>
 					{weekdays.map((w,i) => (
-						<Day key={i} selected={selectedDays.includes(i)} onClick={() => selectDay(i)} >
+						<Day key={i} selected={days.includes(i)} onClick={() => selectDay(i)} >
 							{w}
 						</Day>
 					))}
 				</Days>
 				<Buttons>
 					<p onClick={show}>Cancelar</p>
-					<button>Salvar</button>
+					<button type="submit">Salvar</button>
 				</Buttons>
 			</form>
 		</Box>

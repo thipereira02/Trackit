@@ -10,7 +10,7 @@ export default function AllHabits({ habit }) {
 		<Content>
 			<Title>
 				<p>{habit.name}</p>
-				<BsTrash color="#666" />
+				<BsTrash color="#666" size="16px" />
 			</Title>
 			<Days>
 				{weekdays.map((w,i) => (
@@ -24,9 +24,9 @@ export default function AllHabits({ habit }) {
 }
 
 const Content = styled.div`
-    margin: 0 auto;
+    margin: 0 auto 10px auto;
     height: 91px;
-    background: #FFFFFF;
+    background: #FFF;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -52,14 +52,14 @@ const Days = styled.div`
         width: 30px;
         height: 30px;
         margin-right: 4px;
-        background: #FFFFFF;
+        background: #FFF;
         border: 1px solid #D5D5D5;
         border-radius: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
         color: #DBDBDB;
-        background-color: #FFFFFF;
+        background-color: #FFF;
         font-size: 20px;
     }
 `;
