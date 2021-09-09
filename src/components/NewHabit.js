@@ -4,7 +4,15 @@ import styled from "styled-components";
 
 export default function NewHabit({show}) {
 	const [name, setName] = useState("");
+	const [selectedDays, setSelectedDays] = useState([]);
 	const weekdays = ["D","S","T","Q","Q","S","S"];
+
+	function selectDay(i) {
+		(selectedDays.includes(i)) ? 
+			setSelectedDays(selectedDays.filter(s => s !== i))
+			:
+			setSelectedDays([...selectedDays, i]);
+	}
 
 	return (
 		<Box>
@@ -12,9 +20,9 @@ export default function NewHabit({show}) {
 				<input placeholder="nome do hábito" onChange={(e) => setName(e.target.value)} value={name} required/>
 				<Days>
 					{weekdays.map((w,i) => (
-						<div key={i} >
+						<Day key={i} selected={selectedDays.includes(i)} onClick={() => selectDay(i)} >
 							{w}
-						</div>
+						</Day>
 					))}
 				</Days>
 				<Buttons>
@@ -60,21 +68,21 @@ const Box = styled.div`
 const Days = styled.div`
     display: flex;
     margin-bottom: 29px;
+`;
 
-    div {
-        width: 30px;
-        height: 30px;
-        margin-right: 4px;
-        background: #FFFFFF;
-        border: 1px solid #D5D5D5;
-        border-radius: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #DBDBDB;
-        background-color: #FFFFFF;
-        font-size: 20px;
-    }
+const Day= styled.div`
+    width: 30px;
+    height: 30px;
+    margin-right: 4px;
+    background: #FFFFFF;
+    border: 1px solid ${props => (props.selected ? "#CFCFCF" : "#D4D4D4")};
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${props => (props.selected ? "#FFF" : "#DBDBDB")};
+    background-color: ${props => (props.selected ? "#CFCFCF" : "#FFF")};
+    font-size: 20px;
 `;
 
 const Buttons = styled.div`
