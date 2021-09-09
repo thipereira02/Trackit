@@ -22,7 +22,9 @@ export default function Menu() {
 						backgroundColor: "#52B6FF",
 					})} />
 			</div>
-			<p>Histórico</p>
+			<Link to ="/historic">
+				<p>Histórico</p>
+			</Link>
 		</Content>
 	);
 }

@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { BsTrash } from "react-icons/bs";
 import axios from "axios";
 
+import HabitsDays from "./HabitsDays";
+
 import UserContext from "../contexts/UserContext";
 
 export default function AllHabits({ habit, userHabits }) {
@@ -18,7 +20,6 @@ export default function AllHabits({ habit, userHabits }) {
 			request.then(() => userHabits());
 			request.catch(() => alert("Ocorreu um erro na exclusão do hábito. Tente novamente."));
 		}
-
 	}
 
 	return (
@@ -29,9 +30,7 @@ export default function AllHabits({ habit, userHabits }) {
 			</Title>
 			<Days>
 				{weekdays.map((w,i) => (
-					<div key={i}>
-						{w}
-					</div>
+					<HabitsDays key={i} day={w} markedDay />
 				))}
 			</Days>
 		</Content>
@@ -62,19 +61,4 @@ const Title = styled.div`
 
 const Days = styled.div`
     display: flex;
-
-    div {
-        width: 30px;
-        height: 30px;
-        margin-right: 4px;
-        background: #FFF;
-        border: 1px solid #D5D5D5;
-        border-radius: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #DBDBDB;
-        background-color: #FFF;
-        font-size: 20px;
-    }
 `;

@@ -7,6 +7,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Today from "../pages/Today";
 import Habits from "../pages/Habits";
+import Historic from "../pages/Historic";
 
 export default function App() {
 	const [user, setUser] = useState("");
@@ -28,6 +29,9 @@ export default function App() {
 						</Route>
 						<Route path="/habits" exact>
 							<Habits />
+						</Route>
+						<Route path="/historic" exact>
+							<Historic />
 						</Route>
 					</Switch>
 				</BrowserRouter>
