@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { AiFillCheckSquare } from "react-icons/ai";
 
-export default function Habit({h}) {
+export default function TodayHabit({h}) {
 	return (
 		<>
 			<Content>

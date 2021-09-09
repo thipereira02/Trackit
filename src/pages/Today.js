@@ -6,7 +6,7 @@ import "dayjs/locale/pt-br";
 
 import Header from "../components/common/Header";
 import Menu from "../components/common/Menu";
-import Habit from "../components/Habit";
+import Habit from "../components/TodayHabit";
 
 import UserContext from "../contexts/UserContext";
 
@@ -20,7 +20,7 @@ export default function Today() {
 		request.then(res => {
 			setHabits(res.data);
 		});
-		request.catch(() => alert("Ocorreu um erro na obtenção dos seus hábitos. Tente novamente mais tarde."));
+		request.catch(() => alert("Ocorreu um erro na obtenção dos seus hábitos do dia. Tente novamente mais tarde."));
 	},[]);
 
 	return (

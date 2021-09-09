@@ -1,18 +1,20 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function NewHabit() {
+export default function NewHabit({active}) {
+	
 	const [name, setName] = useState("");
 	const weekdays = ["D","S","T","Q","Q","S","S"];
 
 	return (
-		<Box>
+		<Box status={active}>
 			<form>
 				<input placeholder="nome do hábito" onChange={(e) => setName(e.target.value)} value={name} required/>
 				<Days>
-					{weekdays.map((d,i) => (
+					{weekdays.map((w,i) => (
 						<div key={i} >
-							{d}
+							{w}
 						</div>
 					))}
 				</Days>
@@ -34,6 +36,8 @@ const Box = styled.div`
     flex-direction: column;
     padding: 15px;
     margin-bottom: 29px;
+    display: ${props => (props.status===false) ? "block" : "none"};
+    overflow: ${props => (props.status===false) ? "visible" : "hidden"};
 
     input {
         width: 303px;
@@ -66,7 +70,6 @@ const Days = styled.div`
         margin-right: 4px;
         background: #FFFFFF;
         border: 1px solid #D5D5D5;
-        box-sizing: border-box;
         border-radius: 5px;
         display: flex;
         justify-content: center;

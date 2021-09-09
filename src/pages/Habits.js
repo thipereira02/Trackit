@@ -1,23 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+// import axios from "axios";
 
 import Header from "../components/common/Header";
 import Menu from "../components/common/Menu";
 import NewHabit from "../components/NewHabit";
+import AllHabits from "../components/AllHabits";
+// import UserContext from "../contexts/UserContext";
 
 export default function Habits() {
+	// const { user } = useContext(UserContext);
+	const [box, setBox] = useState(false);
+	// const [habits, setHabits] = useState([]);
+	// const config = { headers: { Authorization: `Bearer ${user.token}` } };
+
+	// useEffect(() => {
+	// 	const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config);
+	// 	request.then(res => setHabits(res.data));
+	// 	request.catch(() => alert("Ocorreu um erro na obtenção dos seus hábitos. Tente novamente mais tarde."));
+	// },[]);
+
 	return (
 		<>
 			<Header />
 			<Container>
 				<TitleLine>
 					<h1>Meus hábitos</h1>
-					<div>+</div>
+					<div onClick={() => setBox(!box)}>+</div>
 				</TitleLine>
-				<NewHabit />
+				<NewHabit active={box}/>
 				<p>
                     Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
 				</p>
+				<AllHabits />
 			</Container>
 			<Menu />
 		</>
