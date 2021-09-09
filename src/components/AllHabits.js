@@ -1,16 +1,31 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { BsTrash } from "react-icons/bs";
+import axios from "axios";
 
-export default function AllHabits({ habit }) {
+import UserContext from "../contexts/UserContext";
+
+export default function AllHabits({ habit, userHabits }) {
+	const { user } = useContext(UserContext);
 	const weekdays = ["D","S","T","Q","Q","S","S"];
+
+	function deleteHabit(habit){
+		if (confirm(`Deseja realmente apagar o hábito "${habit.name}"?`)){
+			const config = { headers: { Authorization: `Bearer ${user.token}` } };
+
+			const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}`, config);
+			request.then(() => userHabits());
+			request.catch(() => alert("Ocorreu um erro na exclusão do hábito. Tente novamente."));
+		}
+
+	}
 
 	return (
 		<Content>
 			<Title>
 				<p>{habit.name}</p>
-				<BsTrash color="#666" size="16px" />
+				<BsTrash color="#666" size="16px" onClick={() => deleteHabit(habit)}/>
 			</Title>
 			<Days>
 				{weekdays.map((w,i) => (

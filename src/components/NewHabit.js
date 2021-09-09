@@ -6,7 +6,7 @@ import Loader from "react-loader-spinner";
 
 import UserContext from "../contexts/UserContext";
 
-export default function NewHabit({show, userHabits}) {
+export default function NewHabit({box, setBox, userHabits}) {
 	const { user } = useContext(UserContext);
 	const [name, setName] = useState("");
 	const [days, setDays] = useState([]);
@@ -34,7 +34,7 @@ export default function NewHabit({show, userHabits}) {
 			setName("");
 			setDays([]);
 			setEnabled(true);
-			show();
+			setBox(!box);
 		});
 		request.catch(() => {
 			setName("");
@@ -56,7 +56,7 @@ export default function NewHabit({show, userHabits}) {
 					))}
 				</Days>
 				<Buttons>
-					<p onClick={show}>
+					<p onClick={() => setBox(!box)}>
                         Cancelar
 					</p>
 					<button type="submit" disabled={enabled ? "" : "disabled"} >

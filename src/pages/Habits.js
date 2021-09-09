@@ -33,7 +33,7 @@ export default function Habits() {
 					<div onClick={() => setBox(!box)}>+</div>
 				</TitleLine>
 				{box === true ?
-					<NewHabit show={() => setBox(false)} userHabits={userHabits}/>
+					<NewHabit box={box} setBox={setBox} userHabits={userHabits}/>
 					:
 					""
 				}				
@@ -43,7 +43,7 @@ export default function Habits() {
 					</p>
 					:
 					habits.map(h => (
-						<AllHabits key={h.id} habit={h} />
+						<AllHabits key={h.id} habit={h} userHabits={userHabits}/>
 					))
 					
 				}
