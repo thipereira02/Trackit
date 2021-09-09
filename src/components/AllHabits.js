@@ -1,14 +1,15 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import styled from "styled-components";
 import { BsTrash } from "react-icons/bs";
 
-export default function AllHabits() {
+export default function AllHabits({ habit }) {
 	const weekdays = ["D","S","T","Q","Q","S","S"];
 
 	return (
 		<Content>
 			<Title>
-				<p>asfasfasf</p>
+				<p>{habit.name}</p>
 				<BsTrash color="#666" />
 			</Title>
 			<Days>

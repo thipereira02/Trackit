@@ -2,13 +2,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function NewHabit({active}) {
-	
+export default function NewHabit({show}) {
 	const [name, setName] = useState("");
 	const weekdays = ["D","S","T","Q","Q","S","S"];
 
 	return (
-		<Box status={active}>
+		<Box>
 			<form>
 				<input placeholder="nome do hábito" onChange={(e) => setName(e.target.value)} value={name} required/>
 				<Days>
@@ -19,7 +18,7 @@ export default function NewHabit({active}) {
 					))}
 				</Days>
 				<Buttons>
-					<p>Cancelar</p>
+					<p onClick={show}>Cancelar</p>
 					<button>Salvar</button>
 				</Buttons>
 			</form>
@@ -36,8 +35,6 @@ const Box = styled.div`
     flex-direction: column;
     padding: 15px;
     margin-bottom: 29px;
-    display: ${props => (props.status===false) ? "block" : "none"};
-    overflow: ${props => (props.status===false) ? "visible" : "hidden"};
 
     input {
         width: 303px;
