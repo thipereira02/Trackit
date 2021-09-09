@@ -2,13 +2,15 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import Loader from "react-loader-spinner";
 
 import UserContext from "../contexts/UserContext";
 
-export default function NewHabit({show}) {
+export default function NewHabit({show, userHabits}) {
 	const { user } = useContext(UserContext);
 	const [name, setName] = useState("");
 	const [days, setDays] = useState([]);
+	const [enabled, setEnabled] = useState(true);
 	const weekdays = ["D","S","T","Q","Q","S","S"];
     
 	function selectDay(i) {
@@ -21,12 +23,25 @@ export default function NewHabit({show}) {
 	function createNewHabit(e) {
 		e.preventDefault();
 
+		setEnabled(false);
+
 		const body = {name, days};
 		const config = { headers: { Authorization: `Bearer ${user.token}` } };
 
 		const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config);
-		request.then(res => console.log(res.data));
-		request.catch(error => console.log(error));
+		request.then(() => {
+			userHabits();
+			setName("");
+			setDays([]);
+			setEnabled(true);
+			show();
+		});
+		request.catch(() => {
+			setName("");
+			setDays([]);
+			setEnabled(true);
+			alert("Ocorreu um erro. Tente novamente.");
+		});
 	}
 
 	return (
@@ -35,14 +50,18 @@ export default function NewHabit({show}) {
 				<input placeholder="nome do hábito" onChange={(e) => setName(e.target.value)} value={name} required/>
 				<Days>
 					{weekdays.map((w,i) => (
-						<Day key={i} selected={days.includes(i)} onClick={() => selectDay(i)} >
+						<Day key={i} selected={days.includes(i)} onClick={() => selectDay(i)} disabled={enabled===true ? "" : "disabled"} >
 							{w}
 						</Day>
 					))}
 				</Days>
 				<Buttons>
-					<p onClick={show}>Cancelar</p>
-					<button type="submit">Salvar</button>
+					<p onClick={show}>
+                        Cancelar
+					</p>
+					<button type="submit" disabled={enabled ? "" : "disabled"} >
+						{enabled===true ? "Salvar" : <Loader type="ThreeDots" color="#FFF" height={35} width={35} />}
+					</button>
 				</Buttons>
 			</form>
 		</Box>

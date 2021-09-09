@@ -15,10 +15,14 @@ export default function Habits() {
 	const config = { headers: { Authorization: `Bearer ${user.token}` } };
 
 	useEffect(() => {
+		userHabits();
+	},[]);
+    
+	function userHabits(){
 		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config);
 		request.then(res => setHabits(res.data));
 		request.catch(() => alert("Ocorreu um erro na obtenção dos seus hábitos. Tente novamente mais tarde."));
-	},[]);
+	}
 
 	return (
 		<>
@@ -29,7 +33,7 @@ export default function Habits() {
 					<div onClick={() => setBox(!box)}>+</div>
 				</TitleLine>
 				{box === true ?
-					<NewHabit show={() => setBox(false)}/>
+					<NewHabit show={() => setBox(false)} userHabits={userHabits}/>
 					:
 					""
 				}				
