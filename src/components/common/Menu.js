@@ -3,61 +3,60 @@ import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { Link } from "react-router-dom";
 
-export default function Menu() {
-	return (
-		<Content>
-			<Link to="/habits">
-				<p>Hábitos</p>
-			</Link>
+export default function Menu(){
+
+	return(
+		<Main>
 			<div>
-				<CircularProgressbar 
-					background
-					backgroundPadding={6}
-					value={75}
-					text={"Hoje"}
-					styles={buildStyles({
-						pathColor: "#fff",
-						textColor: "#fff",
-						trailColor: "#52B6FF",
-						backgroundColor: "#52B6FF",
-					})} />
+				<Link to="/habits">
+					<Button>Hábitos</Button>
+				</Link>
+				<Link to="/today">
+					<MainButton>
+						<CircularProgressbar value={80} text="Hoje" backgroundPadding={5} styles={buildStyles({textSize: "22px", textColor: "#FFF", trailColor: "#52B6FF", pathColor: "#FFF"})}/>
+					</MainButton>
+				</Link>
+				<Link to="/historic">
+					<Button>Histórico</Button>
+				</Link>
 			</div>
-			<Link to ="/historic">
-				<p>Histórico</p>
-			</Link>
-		</Content>
+		</Main>
 	);
 }
 
-const Content = styled.div`
+const Main = styled.div`
+    width: 100%;
+    height: 70px;
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
-    height: 70px;
     display: flex;
+    z-index: 1;
     justify-content: space-around;
     align-items: center;
-    color: #52B6FF;
-    background-color: #FFF;
-    font-size: 18px;
-    line-height: 22px;
-
-    p:first-child {
-        margin-right: 35px;
-    }
-
-    p:last-child {
-        margin-left: 35px;
-    }
+    background: #FFF;
 
     div {
-        position: absolute;
-        bottom: 20px;
-        left: calc((100vw / 2) - 45.5px);
-        width: 91px;
-        height: 91px;
-        border-radius: 50%;
-        background-color: #52B6FF;
+        width: 85%;
+        display: flex;
+        justify-content: space-between;
     }
+`;
+
+const Button = styled.a`
+    border: none;
+    font-size: 18px;
+    color: #52B6FF;
+`;
+
+const MainButton = styled.button`
+    width: 91px;
+    height: 91px;
+    border: none;
+    border-radius: 50%;
+    position: fixed;
+    z-index: 2;
+    right: calc(50% - (91px/2));
+    bottom: 10px;
+    background: #52B6FF;
 `;
