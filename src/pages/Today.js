@@ -48,7 +48,7 @@ export default function Today() {
 					<TodayHabit key={h.id} habit={h} habitsOfTheDay={habitsOfTheDay}/>
 				))}
 			</Content>
-			<Menu />
+			<Menu percentage={percentage}/>
 		</>
 	);
 }

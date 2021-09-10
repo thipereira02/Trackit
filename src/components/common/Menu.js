@@ -1,10 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { Link } from "react-router-dom";
 
-export default function Menu(){
-
+export default function Menu({ percentage }){
 	return(
 		<Content>
 			<div>
@@ -13,7 +13,7 @@ export default function Menu(){
 				</Link>
 				<Link to="/today">
 					<MainButton>
-						<CircularProgressbar value={80} text="Hoje" backgroundPadding={5} styles={buildStyles({textSize: "22px", textColor: "#FFF", trailColor: "#52B6FF", pathColor: "#FFF"})}/>
+						<CircularProgressbar value={percentage} text="Hoje" backgroundPadding={5} styles={buildStyles({textSize: "22px", textColor: "#FFF", trailColor: "#52B6FF", pathColor: "#FFF"})}/>
 					</MainButton>
 				</Link>
 				<Link to="/historic">
