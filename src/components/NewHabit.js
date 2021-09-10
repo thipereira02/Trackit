@@ -47,7 +47,7 @@ export default function NewHabit({box, setBox, userHabits}) {
 	return (
 		<Box>
 			<form onSubmit={createNewHabit}>
-				<input placeholder="nome do hábito" onChange={(e) => setName(e.target.value)} value={name} required/>
+				<input placeholder="nome do hábito" maxLength="16" onChange={(e) => setName(e.target.value)} value={name} required/>
 				<Days>
 					{weekdays.map((w,i) => (
 						<Day key={i} selected={days.includes(i)} onClick={() => selectDay(i)} disabled={enabled===true ? "" : "disabled"} >
