@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { AiFillCheckSquare } from "react-icons/ai";
 import axios from "axios";
+
 import UserContext from "../contexts/UserContext";
 
 export default function TodayHabit({ habit, habitsOfTheDay }){
@@ -12,13 +13,12 @@ export default function TodayHabit({ habit, habitsOfTheDay }){
 
 	function checkOrUncheck(habit){
 		let url = "";
-		const body = {};
 		const config = { headers: { Authorization: `Bearer ${user.token || localUser}` } };
 
 		if (habit.done) url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/uncheck`;
 		else url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/check`;
 
-		const request = axios.post(url, body, config);
+		const request = axios.post(url, {}, config);
 		request.then(() => {
 			habitsOfTheDay();
 			setColor(true);

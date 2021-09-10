@@ -14,8 +14,6 @@ export default function App() {
 	const [user, setUser] = useState("");
 	const [percentage, setPercentage] = useState(0);
 
-	console.log(percentage);
-
 	return (
 		<>
 			<UserContext.Provider value={{user, setUser}}>
