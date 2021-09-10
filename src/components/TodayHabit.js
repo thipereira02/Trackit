@@ -19,11 +19,12 @@ export default function TodayHabit({ habit, habitsOfTheDay }){
 
 		const request = axios.post(url, body, config);
 		request.then(() => {
-			setColor(true);
 			habitsOfTheDay();
+			setColor(true);
 		});
 		request.catch(() => alert("Ocorreu um erro na marcação do hábito. Tente novamente."));
 	}
+
 
 	return (
 		<> 
