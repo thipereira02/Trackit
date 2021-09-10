@@ -6,7 +6,6 @@ import axios from "axios";
 import UserContext from "../contexts/UserContext";
 
 export default function TodayHabit({habit}){
-	console.log(habit);
 	const { user } = useContext(UserContext);
 
 	function checkOrUncheck(habit){

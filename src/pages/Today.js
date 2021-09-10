@@ -28,7 +28,7 @@ export default function Today() {
 			<Header />
 			<Content>
 				<h1>{dayjs().locale("pt-br").format("dddd, DD/MM")}</h1>
-				{habits.find(h => h.done!==0) ? 
+				{habits.find(h => h.done!==false) ? 
 					<h2>67% dos hábitos concluídos</h2>
 					:
 					<h2>Nenhum hábito concluído ainda</h2>
