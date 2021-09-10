@@ -26,10 +26,10 @@ export default function TodayHabit({ habit, habitsOfTheDay }){
 			<Content>
 				<div>
 					<h1>{habit.name}</h1>
-					<p>Sequência atual: <Sequence >{habit.currentSequence} dias</Sequence></p>
-					<p>Seu recorde: <Sequence >{habit.highestSequence} dias</Sequence></p>
+					<p>Sequência atual: <Sequence color={habit.done}>{habit.currentSequence} dias</Sequence></p>
+					<p>Seu recorde: <Sequence color={habit.done}>{habit.highestSequence} dias</Sequence></p>
 				</div>
-				<Check onClick={() => checkOrUncheck(habit)}/>
+				<Check color={habit.done} onClick={() => checkOrUncheck(habit)}/>
 			</Content>
 		</>
 	);
@@ -65,9 +65,9 @@ const Content = styled.div`
 
 const Check = styled(AiFillCheckSquare)`
   font-size: 89px;
-  color: #8FC549;
+  color: ${props => (!props.color) ? "#666666" : "#8FC549"};
 `;
 
 const Sequence = styled.span`
-    color: ${props => (props.color===false) ? "#666666" : "#8FC549"};
+    color: ${props => (!props.color) ? "#666666" : "#8FC549"};
 `;
