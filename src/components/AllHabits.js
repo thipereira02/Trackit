@@ -30,7 +30,7 @@ export default function AllHabits({ habit, userHabits }) {
 			</Title>
 			<Days>
 				{weekdays.map((w,i) => (
-					<HabitsDays key={i} day={w} markedDay />
+					<HabitsDays key={i} day={w} markedDay={habit.days.includes(i)} />
 				))}
 			</Days>
 		</Content>

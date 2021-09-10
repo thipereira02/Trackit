@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Menu(){
 
 	return(
-		<Main>
+		<Content>
 			<div>
 				<Link to="/habits">
 					<Button>Hábitos</Button>
@@ -20,11 +20,11 @@ export default function Menu(){
 					<Button>Histórico</Button>
 				</Link>
 			</div>
-		</Main>
+		</Content>
 	);
 }
 
-const Main = styled.div`
+const Content = styled.div`
     width: 100%;
     height: 70px;
     position: fixed;

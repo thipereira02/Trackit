@@ -6,7 +6,7 @@ import "dayjs/locale/pt-br";
 
 import Header from "../components/common/Header";
 import Menu from "../components/common/Menu";
-import Habit from "../components/TodayHabit";
+import TodayHabit from "../components/TodayHabit";
 
 import UserContext from "../contexts/UserContext";
 
@@ -28,10 +28,15 @@ export default function Today() {
 			<Header />
 			<Content>
 				<h1>{dayjs().locale("pt-br").format("dddd, DD/MM")}</h1>
-				<h2>Nenhum hábito concluído ainda</h2>
-				{habits.map(h => {
-					<Habit key={h.id} habit={h}/>;
-				})}
+				{habits.find(h => h.done!==0) ? 
+					<h2>67% dos hábitos concluídos</h2>
+					:
+					<h2>Nenhum hábito concluído ainda</h2>
+				}
+				
+				{habits.map(h => (
+					<TodayHabit key={h.id} habit={h}/>
+				))}
 			</Content>
 			<Menu />
 		</>
