@@ -24,14 +24,14 @@ export default function Today() {
 		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
 		request.then(res => {
 			setHabits(res.data);
-			value();
+			value(res.data);
 		});
 		request.catch(() => alert("Ocorreu um erro na obtenção dos seus hábitos do dia. Tente novamente mais tarde."));
 	}
 
-	function value(){
-		const done = habits.filter(h => h.done===true);
-		setPercentage((done.length/habits.length)*100);
+	function value(data){
+		const done = data.filter(d => d.done===true);
+		setPercentage((done.length/data.length)*100);
 	}
 
 	return (
@@ -40,11 +40,10 @@ export default function Today() {
 			<Content>
 				<h1>{dayjs().locale("pt-br").format("dddd, DD/MM")}</h1>
 				{habits.find(h => h.done!==false) ? 
-					<h2>{percentage.toFixed(2)}% dos hábitos concluídos</h2>
+					<h2>{percentage%1===0 ? percentage.toFixed(0) : percentage.toFixed(2)}% dos hábitos concluídos</h2>
 					:
 					<h2>Nenhum hábito concluído ainda</h2>
 				}
-				
 				{habits.map(h => (
 					<TodayHabit key={h.id} habit={h} habitsOfTheDay={habitsOfTheDay}/>
 				))}

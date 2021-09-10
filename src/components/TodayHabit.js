@@ -43,7 +43,7 @@ export default function TodayHabit({ habit, habitsOfTheDay }){
 const Content = styled.div`
     margin: 0 auto;
     height: 94px;
-    background: #FFFFFF;
+    background: #FFF;
     border-radius: 5px;
     margin-bottom: 10px;
     display: flex;
@@ -57,13 +57,13 @@ const Content = styled.div`
 
     h1 {
         font-size: 20px;
-        color: #666666;
+        color: #666;
         margin-bottom: 3px;
     }
 
     p {
         font-size: 13px;
-        color: #666666;
+        color: #666;
         margin-bottom: 2px;
     }
 `;
@@ -74,5 +74,5 @@ const Check = styled(AiFillCheckSquare)`
 `;
 
 const Sequence = styled.span`
-    color: ${props => (!props.color) ? "#666666" : "#8FC549"};
+    color: ${props => (!props.color) ? "#666" : "#8FC549"};
 `;
