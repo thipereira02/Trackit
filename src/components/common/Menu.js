@@ -1,10 +1,14 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { Link } from "react-router-dom";
 
-export default function Menu({ percentage }){
+import PercentageContext from "../../contexts/PercentageContext";
+
+export default function Menu(){
+	const { percentage } = useContext(PercentageContext);
+
 	return(
 		<Content>
 			<div>

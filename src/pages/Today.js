@@ -9,11 +9,12 @@ import Menu from "../components/common/Menu";
 import TodayHabit from "../components/TodayHabit";
 
 import UserContext from "../contexts/UserContext";
+import PercentageContext from "../contexts/PercentageContext";
 
 export default function Today() {
 	const { user } = useContext(UserContext);
+	const { percentage, setPercentage } = useContext(PercentageContext);
 	const [habits, setHabits] = useState([]);
-	const [percentage, setPercentage] = useState(0);
 	const localUser = JSON.parse(localStorage.getItem("user"));
 
 	useEffect(() => {
@@ -50,7 +51,7 @@ export default function Today() {
 					<TodayHabit key={h.id} habit={h} habitsOfTheDay={habitsOfTheDay}/>
 				))}
 			</Content>
-			<Menu percentage={percentage}/>
+			<Menu />
 		</>
 	);
 }
