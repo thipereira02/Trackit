@@ -16,12 +16,16 @@ export default function Today() {
 	const [habits, setHabits] = useState([]);
 
 	useEffect(() => {
+		habitsOfTheDay();
+	},[]);
+	
+	function habitsOfTheDay(){
 		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
 		request.then(res => {
 			setHabits(res.data);
 		});
 		request.catch(() => alert("Ocorreu um erro na obtenção dos seus hábitos do dia. Tente novamente mais tarde."));
-	},[]);
+	}
 
 	return (
 		<>
@@ -35,7 +39,7 @@ export default function Today() {
 				}
 				
 				{habits.map(h => (
-					<TodayHabit key={h.id} habit={h}/>
+					<TodayHabit key={h.id} habit={h} habitsOfTheDay={habitsOfTheDay}/>
 				))}
 			</Content>
 			<Menu />

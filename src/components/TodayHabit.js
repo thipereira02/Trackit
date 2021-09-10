@@ -5,7 +5,7 @@ import { AiFillCheckSquare } from "react-icons/ai";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
 
-export default function TodayHabit({habit}){
+export default function TodayHabit({ habit, habitsOfTheDay }){
 	const { user } = useContext(UserContext);
 
 	function checkOrUncheck(habit){
@@ -17,7 +17,8 @@ export default function TodayHabit({habit}){
 		else url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/check`;
 
 		const request = axios.post(url, body, config);
-		request.then(() => console.log("blz"));
+		request.then(() => habitsOfTheDay());
+		request.catch(() => alert("Ocorreu um erro na marcação do hábito. Tente novamente."));
 	}
 
 	return (
