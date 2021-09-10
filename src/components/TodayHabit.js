@@ -8,11 +8,12 @@ import UserContext from "../contexts/UserContext";
 export default function TodayHabit({ habit, habitsOfTheDay }){
 	const { user } = useContext(UserContext);
 	const [color, setColor] = useState(false);
+	const localUser = JSON.parse(localStorage.getItem("user"));
 
 	function checkOrUncheck(habit){
 		let url = "";
 		const body = {};
-		const config = { headers: { Authorization: `Bearer ${user.token}` } };
+		const config = { headers: { Authorization: `Bearer ${user.token || localUser}` } };
 
 		if (habit.done) url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/uncheck`;
 		else url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/check`;

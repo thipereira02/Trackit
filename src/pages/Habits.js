@@ -12,13 +12,15 @@ export default function Habits() {
 	const { user } = useContext(UserContext);
 	const [box, setBox] = useState(false);
 	const [habits, setHabits] = useState([]);
-	const config = { headers: { Authorization: `Bearer ${user.token}` } };
+	const localUser = JSON.parse(localStorage.getItem("user"));
 
 	useEffect(() => {
 		userHabits();
 	},[]);
     
 	function userHabits(){
+		const config = { headers: { Authorization: `Bearer ${user.token || localUser}` } };
+
 		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config);
 		request.then(res => setHabits(res.data));
 		request.catch(() => alert("Ocorreu um erro na obtenção dos seus hábitos. Tente novamente mais tarde."));

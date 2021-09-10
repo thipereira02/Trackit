@@ -24,6 +24,7 @@ export default function Login() {
 		request.then(res => {
 			const newUserData = {id: res.data.id, name: res.data.name, token: res.data.token, image: res.data.image};
 			setUser(newUserData);
+			localStorage.setItem("user", JSON.stringify(res.data.token));
 			history.push("/today");
 		});
 		request.catch(() => {

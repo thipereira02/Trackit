@@ -11,10 +11,11 @@ import UserContext from "../contexts/UserContext";
 export default function AllHabits({ habit, userHabits }) {
 	const { user } = useContext(UserContext);
 	const weekdays = ["D","S","T","Q","Q","S","S"];
+	const localUser = JSON.parse(localStorage.getItem("user"));
 
 	function deleteHabit(habit){
 		if (confirm(`Deseja realmente apagar o hábito "${habit.name}"?`)){
-			const config = { headers: { Authorization: `Bearer ${user.token}` } };
+			const config = { headers: { Authorization: `Bearer ${user.token || localUser}` } };
 
 			const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}`, config);
 			request.then(() => userHabits());

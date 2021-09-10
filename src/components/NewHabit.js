@@ -12,6 +12,7 @@ export default function NewHabit({box, setBox, userHabits}) {
 	const [days, setDays] = useState([]);
 	const [enabled, setEnabled] = useState(true);
 	const weekdays = ["D","S","T","Q","Q","S","S"];
+	const localUser = JSON.parse(localStorage.getItem("user"));
     
 	function selectDay(i) {
 		(days.includes(i)) ? 
@@ -26,7 +27,7 @@ export default function NewHabit({box, setBox, userHabits}) {
 		setEnabled(false);
 
 		const body = {name, days};
-		const config = { headers: { Authorization: `Bearer ${user.token}` } };
+		const config = { headers: { Authorization: `Bearer ${user.token || localUser}` } };
 
 		const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config);
 		request.then(() => {

@@ -12,15 +12,17 @@ import UserContext from "../contexts/UserContext";
 
 export default function Today() {
 	const { user } = useContext(UserContext);
-	const config = { headers: { Authorization: `Bearer ${user.token}` } };
 	const [habits, setHabits] = useState([]);
 	const [percentage, setPercentage] = useState(0);
+	const localUser = JSON.parse(localStorage.getItem("user"));
 
 	useEffect(() => {
 		habitsOfTheDay();
 	},[]);
 	
 	function habitsOfTheDay(){
+		const config = { headers: { Authorization: `Bearer ${user.token || localUser}` } };
+
 		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
 		request.then(res => {
 			setHabits(res.data);
