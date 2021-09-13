@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import Loader from "react-loader-spinner";
@@ -11,10 +11,15 @@ import UserContext from "../contexts/UserContext";
 
 export default function Login() {
 	const { setUser } = useContext(UserContext);
+	const user = localStorage.getItem("user");
 	const history = useHistory();
 	const [email, setEmail] = useState("");
 	const [password,setPassword] = useState("");
 	const [button, setButton] = useState(true);
+
+	useEffect(() => {
+		user ? history.push("/today") : setUser(null);	
+	}, [history, user, setUser]);
 
 	function login(e){
 		e.preventDefault();

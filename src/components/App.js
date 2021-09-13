@@ -11,7 +11,7 @@ import Habits from "../pages/Habits";
 import Historic from "../pages/Historic";
 
 export default function App() {
-	const [user, setUser] = useState("");
+	const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 	const [percentage, setPercentage] = useState(0);
 
 	return (
