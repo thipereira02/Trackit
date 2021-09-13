@@ -2,10 +2,10 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import Loader from "react-loader-spinner";
-import axios from "axios";
 
 import logo from "../components/assets/logo.png";
 import { Logo, Body, Input, Button } from "../layouts/Login_SignUp";
+import { signIn } from "../services/requests";
 
 import UserContext from "../contexts/UserContext";
 
@@ -20,14 +20,16 @@ export default function Login() {
 		e.preventDefault();
 		setButton(false);
 
-		const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", {email, password});
-		request.then(res => {
+		const body = {email, password};
+		const req = signIn(body);
+
+		req.then(res => {
 			const newUserData = {id: res.data.id, name: res.data.name, token: res.data.token, image: res.data.image};
 			setUser(newUserData);
 			localStorage.setItem("user", JSON.stringify(res.data.token));
 			history.push("/today");
 		});
-		request.catch(() => {
+		req.catch(() => {
 			alert("Email ou senha incorretos");
 			setButton(true);
 		});

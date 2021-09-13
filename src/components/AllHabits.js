@@ -2,9 +2,9 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { BsTrash } from "react-icons/bs";
-import axios from "axios";
 
 import HabitsDays from "./HabitsDays";
+import {deleteAnHabit} from "../services/requests";
 
 import UserContext from "../contexts/UserContext";
 
@@ -16,10 +16,11 @@ export default function AllHabits({ habit, userHabits }) {
 	function deleteHabit(habit){
 		if (confirm(`Deseja realmente apagar o hábito "${habit.name}"?`)){
 			const config = { headers: { Authorization: `Bearer ${user.token || localUser}` } };
+			const id = habit.id;
+			const req = deleteAnHabit(id, config);
 
-			const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}`, config);
-			request.then(() => userHabits());
-			request.catch(() => alert("Ocorreu um erro na exclusão do hábito. Tente novamente."));
+			req.then(() => userHabits());
+			req.catch(() => alert("Ocorreu um erro na exclusão do hábito. Tente novamente."));
 		}
 	}
 

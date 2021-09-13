@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Loader from "react-loader-spinner";
-import axios from "axios";
 
 import logo from "../components/assets/logo.png";
 import { Logo, Body, Input, Button } from "../layouts/Login_SignUp";
+import { register } from "../services/requests";
 
 export default function SignUp() {
 	const history = useHistory();
@@ -25,9 +25,10 @@ export default function SignUp() {
 			image,
 			password
 		};
-		const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body);
-		request.then(() => history.push("/"));
-		request.catch(() =>{
+		const req = register(body);
+
+		req.then(() => history.push("/"));
+		req.catch(() =>{
 			alert("Erro no preenchimento. Tente novamente.");
 			setButton(true);
 		});

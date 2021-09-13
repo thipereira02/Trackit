@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 
 import Header from "../components/common/Header";
 import Menu from "../components/common/Menu";
 import TodayHabit from "../components/TodayHabit";
+import { myTodayHabits } from "../services/requests";
 
 import UserContext from "../contexts/UserContext";
 import PercentageContext from "../contexts/PercentageContext";
@@ -23,13 +23,13 @@ export default function Today() {
 	
 	function habitsOfTheDay(){
 		const config = { headers: { Authorization: `Bearer ${user.token || localUser}` } };
+		const req = myTodayHabits(config);
 
-		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
-		request.then(res => {
+		req.then(res => {
 			setHabits(res.data);
 			value(res.data);
 		});
-		request.catch(() => alert("Ocorreu um erro na obtenção dos seus hábitos do dia. Tente novamente mais tarde."));
+		req.catch(() => alert("Ocorreu um erro na obtenção dos seus hábitos do dia. Tente novamente mais tarde."));
 	}
 
 	function value(data){

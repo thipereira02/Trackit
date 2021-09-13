@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 
 import Header from "../components/common/Header";
 import Menu from "../components/common/Menu";
 import NewHabit from "../components/NewHabit";
 import AllHabits from "../components/AllHabits";
 import UserContext from "../contexts/UserContext";
+import { listHabits } from "../services/requests";
 
 export default function Habits() {
 	const { user } = useContext(UserContext);
@@ -20,10 +20,10 @@ export default function Habits() {
     
 	function userHabits(){
 		const config = { headers: { Authorization: `Bearer ${user.token || localUser}` } };
+		const req = listHabits(config);
 
-		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config);
-		request.then(res => setHabits(res.data));
-		request.catch(() => alert("Ocorreu um erro na obtenção dos seus hábitos. Tente novamente mais tarde."));
+		req.then(res => setHabits(res.data));
+		req.catch(() => alert("Ocorreu um erro na obtenção dos seus hábitos. Tente novamente mais tarde."));
 	}
 
 	return (

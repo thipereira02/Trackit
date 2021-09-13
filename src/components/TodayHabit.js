@@ -2,7 +2,8 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { AiFillCheckSquare } from "react-icons/ai";
-import axios from "axios";
+
+import { habitDone, habitToDo } from "../services/requests";
 
 import UserContext from "../contexts/UserContext";
 
@@ -12,20 +13,18 @@ export default function TodayHabit({ habit, habitsOfTheDay }){
 	const localUser = JSON.parse(localStorage.getItem("user"));
 
 	function checkOrUncheck(habit){
-		let url = "";
 		const config = { headers: { Authorization: `Bearer ${user.token || localUser}` } };
+		const id = habit.id;
+		let req = "";
 
-		if (habit.done) url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/uncheck`;
-		else url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/check`;
+		(habit.done) ? (req = habitToDo(id, config)) : (req = habitDone(id, config));
 
-		const request = axios.post(url, {}, config);
-		request.then(() => {
+		req.then(() => {
 			habitsOfTheDay();
 			setColor(true);
 		});
-		request.catch(() => alert("Ocorreu um erro na marcação do hábito. Tente novamente."));
+		req.catch(() => alert("Ocorreu um erro na marcação do hábito. Tente novamente."));
 	}
-
 
 	return (
 		<> 

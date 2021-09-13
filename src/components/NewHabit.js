@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import Loader from "react-loader-spinner";
 
 import UserContext from "../contexts/UserContext";
+import { createHabit } from "../services/requests";
 
 export default function NewHabit({box, setBox, userHabits}) {
 	const { user } = useContext(UserContext);
@@ -28,16 +28,16 @@ export default function NewHabit({box, setBox, userHabits}) {
 
 		const body = {name, days};
 		const config = { headers: { Authorization: `Bearer ${user.token || localUser}` } };
+		const req = createHabit(body, config);
 
-		const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config);
-		request.then(() => {
+		req.then(() => {
 			userHabits();
 			setName("");
 			setDays([]);
 			setEnabled(true);
 			setBox(!box);
 		});
-		request.catch(() => {
+		req.catch(() => {
 			setName("");
 			setDays([]);
 			setEnabled(true);
