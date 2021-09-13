@@ -43,7 +43,7 @@ export default function Today() {
 			<Content>
 				<h1>{dayjs().locale("pt-br").format("dddd, DD/MM")}</h1>
 				{habits.find(h => h.done!==false) ? 
-					<h2>{percentage%1===0 ? percentage.toFixed(0) : percentage.toFixed(2)}% dos hábitos concluídos</h2>
+					<Text color={percentage}>{percentage%1===0 ? percentage.toFixed(0) : percentage.toFixed(2)}% dos hábitos concluídos</Text>
 					:
 					<h2>Nenhum hábito concluído ainda</h2>
 				}
@@ -73,4 +73,11 @@ const Content = styled.div`
 		color: #BABABA;
 		margin-bottom: 28px;
 	}
+`;
+
+const Text = styled.p`
+	font-size: 18px;
+	line-height: 22px;
+	color: ${props => (props.color === 100 ? "#8FC549" : "#BABABA")};
+	margin-bottom: 28px;
 `;
