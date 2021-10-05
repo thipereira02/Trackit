@@ -2,6 +2,8 @@
 
 An easy to use habit manager where you create your habits, deciding which days will be done and daily monitor the progress and record of each.
 
+<img position="center" src="./public/assets/trackit.gif" alt="GIF" />
+
 Try it out now at https://trackit-omega.vercel.app/
 
 ## Features
